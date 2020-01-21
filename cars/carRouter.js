@@ -1,6 +1,8 @@
 const express = require('express')
 const db = require('../data/dbConfig.js')
 
+const validateCar = require('../middleware/validateCar.js')
+
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -14,7 +16,7 @@ router.get('/', (req, res) => {
         })
 })
 
-router.post('/', (req, res) => {
+router.post('/', validateCar, (req, res) => {
     const data = req.body
 
     db('cars')
