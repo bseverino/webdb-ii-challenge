@@ -2,9 +2,11 @@ const express = require('express')
 const db = require('../data/dbConfig.js')
 
 const validateCar = require('../middleware/validateCar.js')
+const validateId = require('../middleware/validateId.js')
 
 const router = express.Router()
 
+// return list of cars
 router.get('/', (req, res) => {
     db('cars')
         .then(cars => {
@@ -16,6 +18,12 @@ router.get('/', (req, res) => {
         })
 })
 
+// return car by id
+router.get('/:id', validateId, (req, res) => {
+    res.status(200).json(req.car)
+})
+
+// register a new car
 router.post('/', validateCar, (req, res) => {
     const data = req.body
 
