@@ -1,6 +1,6 @@
 const db = require('../data/dbConfig.js')
 
-function validateCar(req, res, next) {
+function validateCarUpdate(req, res, next) {
     const body = req.body
     const id = req.params.id
 
@@ -36,4 +36,4 @@ function validateCar(req, res, next) {
     }
 }
 
-module.exports = validateCar
+module.exports = validateCarUpdate
