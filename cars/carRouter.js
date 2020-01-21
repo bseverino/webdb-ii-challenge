@@ -65,4 +65,22 @@ router.put('/:id', validateId, validateCarUpdate, (req, res) => {
         })
 })
 
+// delete a car
+router.delete('/:id', validateId, (req, res) => {
+    const id = req.params.id
+
+    db('cars')
+        .where('id', id)
+        .del()
+        .then(deleted => {
+            res.status(202).json(deleted)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                message: 'Error removing car.'
+            })
+        })
+})
+
 module.exports = router
